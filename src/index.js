@@ -1,6 +1,6 @@
 import './style.css';
-import {Truck, PassangerCar, GasCar} from './modules/car';
-import {Station} from './modules/station';
+import { Truck, PassangerCar, GasCar } from './modules/car';
+import { Station } from './modules/station';
 
 const open = document.querySelector('.open');
 const car = document.querySelector('.car');
@@ -33,16 +33,16 @@ const testArray = {
   ],
 };
 
-const getTestCar = () => {
+const getTestCar = () => { // get random car in array
   const typeBool = Math.random();
   const listCar = (typeBool < 0.4) ?
     testArray.passangerCar : (0.4 <= typeBool && typeBool < 0.7) ?
-    testArray.gasCar : testArray.truck;
+      testArray.gasCar : testArray.truck;
 
   const randomCar = listCar[(Math.floor(Math.random() * listCar.length))];
   return (typeBool < 0.4) ?
-  new PassangerCar(...randomCar) : (0.4 <= typeBool && typeBool < 0.7) ?
-  new GasCar(...randomCar) : new Truck(...randomCar);
+    new PassangerCar(...randomCar) : (0.4 <= typeBool && typeBool < 0.7) ?
+      new GasCar(...randomCar) : new Truck(...randomCar);
 };
 
 const station = new Station([
@@ -53,7 +53,7 @@ const station = new Station([
   },
   {
     type: 'diesel',
-    count: 1,
+    count: 2,
     speed: 20,
   },
   {
@@ -65,7 +65,6 @@ const station = new Station([
 
 open.addEventListener('click', () => {
   station.init();
-  console.log(station);
   open.remove();
   car.style.display = 'block';
   car.addEventListener('click', () => {

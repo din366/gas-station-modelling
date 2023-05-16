@@ -1,5 +1,5 @@
-import {Column} from './column';
-import {RenderStation} from './renderStation';
+import { Column } from './column';
+import { RenderStation } from './renderStation';
 
 export class Station {
   #queue = [];
@@ -52,10 +52,15 @@ export class Station {
       for (let i = 0; i < this.#queue.length; i++) {
         for (let j = 0; j < this.#filling.length; j++) {
           if (!this.#filling[j].car &&
-          this.#queue[i].typeFuel === this.#filling[j].type) {
+            this.#queue[i].typeFuel === this.#filling[j].type) {
             this.#filling[j].car = this.#queue.splice(i, 1)[0];
             this.fillingGo(this.#filling[j]);
-            this.renderStation.renderStation();
+            if (this.#ready.length) {
+              this.renderStation.renderStation(this.#ready);
+            } else {
+              this.renderStation.renderStation(null);
+            }
+
             break;
           }
         }
@@ -75,18 +80,23 @@ export class Station {
         const total = car.nowTank - needPetrol;
         car.fillUp();
         column.car = null;
-        this.leaveClient({car, total});
+        this.leaveClient({ car, total });
       }
     }, 1000);
   }
 
-  leaveClient({car, total}) {
+  leaveClient({ car, total }) {
     this.#ready.push(car);
-    this.renderStation.renderStation();
+    this.renderStation.renderStation(this.#ready);
   }
 
   addCarQueue(car) {
     this.#queue.push(car);
-    this.renderStation.renderStation();
+    if (this.#ready.length) {
+      this.renderStation.renderStation(this.#ready);
+    } else {
+      this.renderStation.renderStation(null);
+    }
+
   }
 }

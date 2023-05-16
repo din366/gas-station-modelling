@@ -14,7 +14,7 @@ export class Car {
 
   setModel(model) {
     this.model = model;
-    return this;
+    return this; // для чейнинга
   }
 
   get needPetrol() {
@@ -23,7 +23,7 @@ export class Car {
 
   fillUp() {
     this.nowTank = this.#maxTank;
-    return this;
+    return this; // для чейнинга
   }
 
   get maxTank() {
@@ -40,7 +40,7 @@ export class Car {
     console.log(str);
   }
 
-  static from({brand, model, maxTank}) {
+  static from({ brand, model, maxTank }) {
     const car = new Car(brand, model, maxTank);
     Car.logger(Car.string + car.getTitle());
     return car;

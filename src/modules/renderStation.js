@@ -17,11 +17,17 @@ export class RenderStation {
     this.renderStation();
   }
 
-  renderStation() {
+  renderStation(leavesClient) {
     this.wrapper.textContent = '';
     const queueList = this.createQueue();
     const columns = this.createColums();
-    this.wrapper.append(queueList, columns);
+    if (leavesClient) {
+      const leavesClientTable = this.createLeavesClientTable(leavesClient);
+      this.wrapper.append(queueList, columns, leavesClientTable);
+    } else {
+      this.wrapper.append(queueList, columns);
+    }
+
     document.querySelector(this.app).append(this.wrapper);
   }
 
@@ -65,6 +71,23 @@ export class RenderStation {
       columns.append(itemColumn);
     });
     return columns;
+  }
+
+  createLeavesClientTable(clients) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('leaves-client-wrapper');
+    const title = document.createElement('p');
+    title.textContent = 'Обработанные клиенты:';
+    const columns = document.createElement('ul');
+    columns.classList.add('leaves-client');
+    clients.map(item => {
+      const itemLi = document.createElement('li');
+      itemLi.textContent =
+        `${item.brand} ${item.model} - client ID = ${item.id}`;
+      columns.append(itemLi);
+    });
+    wrapper.append(title, columns);
+    return wrapper;
   }
 
   renderCheckFuel(car, nowTank) {

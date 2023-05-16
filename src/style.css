@@ -26,21 +26,33 @@ ul {
 
 .columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, 290px);
+  grid-gap: 20px;
+}
+
+.columns li {
+  /* padding: 15px; */
+}
+
+.columns li p {
+  font-size: 18px;
+  margin-bottom: 3px;
 }
 
 .petrol {
   list-style-image: url(assets/img/icon-park_petrol.svg);
-  list-style-type: '👉';
+  list-style-position: inside;
   padding-inline-start: 1ch;
 }
 
 .diesel {
   list-style-image: url(assets/img/icon-park-outline_petrol.svg);
+  list-style-position: inside;
 }
 
 .gas {
   list-style-image: url(assets/img/gas.png);
+  list-style-position: inside;
 }
 
 .Passanger {
@@ -65,7 +77,7 @@ ul {
 }
 
 .form-input {
-  width: 600px;
+  width: 90%;
   padding: 20px;
   background: #fff;
   box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
@@ -112,7 +124,7 @@ h1 {
 
 .btn {
   display: block;
-  width: 300px;
+  width: 350px;
   height: 45px;
   margin: 0 auto 20px;
   line-height: 50px;
@@ -147,4 +159,14 @@ h1 {
 
 .car {
   display: none;
+}
+
+.leaves-client {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.leaves-client-wrapper p {
+  font-size: 18px;
+  margin-bottom: 5px;
 }
